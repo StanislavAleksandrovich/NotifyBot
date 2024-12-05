@@ -26,9 +26,16 @@ How to use
 
 
 notify.conf
-label_key:label_value:notification_url
+key:value:notification_url
 
 example
 service:web-app:https://slack.com/webhook?text=$description
 team:sales:https://pagerduty.com/alert?message=$description
+
+
+in alertmanager.yml
+receivers:
+- name: 'webhook-notifier'
+  webhook_configs:
+  - url: 'http://localhost:8083/notifybot'
 ```
