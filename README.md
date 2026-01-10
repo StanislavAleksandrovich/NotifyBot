@@ -24,11 +24,30 @@ How to use
 
 
 notify.conf
-key=value:notification_url
 
-example
-service=web-app:https://slack.com/webhook?text=$description
-team=sales:https://pagerduty.com/alert?message=$description
+Valid format
+key=value:notification_url
+key1=val1,key2=val2:notification_url
+key="value with spaces":notification_url
+key="a,b,c":notification_url
+k1=v1,k2="v 2",k3="a,b,c":notification_url
+key='value':notification_url
+
+Example notify.conf
+# Simple
+team=Devops:https://slack.com/webhook?text=$description
+
+# Multiple labels
+team=Devops,namespace=frontend:https://slack.com/webhook?text=$description
+
+# With spaces in value
+team=Devops,namespace=backend,job="my ne job":https://slack.com/webhook?text=$description
+
+# With commas in value
+team=Devops,namespace=prod,job="my new job",members="a,b,c":https://slack.com/webhook?text=$description
+
+
+
 
 
 in alertmanager.yml use value of this flag -receiver , default notifybot
